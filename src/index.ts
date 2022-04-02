@@ -1,6 +1,5 @@
 import Game from './Game.js';
 
-
 let canvas: HTMLCanvasElement;
 
 window.addEventListener('load', async () => {
@@ -8,9 +7,9 @@ window.addEventListener('load', async () => {
   document.body.appendChild(canvas);
   sizeCanvas();
 
-  const game = new Game();
+  const ctx = canvas.getContext('2d')!;
+  const game = new Game(ctx);
   game.run(0);
-
 });
 
 function sizeCanvas() {
