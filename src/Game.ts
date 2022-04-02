@@ -1,10 +1,12 @@
 import Centipede from "./Centipede.js";
+import GhostLeg from "./GhostLeg.js";
 
 export default class Game {
   state: GameState;
   lastTimestamp: number;
   dt: number = 0;
   cent: Centipede;
+  gl: GhostLeg;
 
   constructor(readonly ctx: CanvasRenderingContext2D) {
     this.state = GameState.RUNNING;
@@ -17,6 +19,9 @@ export default class Game {
     this.cent.path.addPoint({ x:500, y:400 })
     this.cent.path.addPoint({ x:500, y:100 })
     this.cent.path.addPoint({ x:100, y:100 })
+
+    this.gl = new GhostLeg(4, 400, 400, { x: 200, y: 400 });
+    this.gl.generate(15);
   }
 
   run(time: number) {
@@ -33,6 +38,7 @@ export default class Game {
     this.ctx.fillRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
     this.cent.draw(this.ctx);
+    this.gl.draw(this.ctx);
   }
 }
 
